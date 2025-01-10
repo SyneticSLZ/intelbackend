@@ -284,10 +284,12 @@ for (const date of dates) {
 // FDA API Utility Functions
 async function callFDAAPI(endpoint, params, retries = 3) {
     try {
+        
         // Log the full request details
         const url = `https://api.fda.gov/${endpoint}`;
         const fullParams = {
             api_key: process.env.FDA_API_KEY,
+            
             ...params
         };
         
