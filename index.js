@@ -289,7 +289,7 @@ async function callFDAAPI(endpoint, params, retries = 3) {
         const url = `https://api.fda.gov/${endpoint}`;
         const fullParams = {
             api_key: process.env.FDA_API_KEY,
-            
+
             ...params
         };
         
@@ -2913,8 +2913,7 @@ async function searchDeviceClassification(searchTerm, apiKey) {
 // Helper function for FDA API calls
 async function makeFDARequest(name, endpoint, searchParams) {
     const defaultParams = {
-        sort: 'report_date:desc',  // Sort by report date descending
-        limit: 1                   // Limit to most recent result
+        sort: 'report_date:desc' // Sort by report date descending               // Limit to most recent result
     };
     const params = new URLSearchParams({
         api_key: process.env.FDA_API_KEY,
