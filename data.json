@@ -1,0 +1,45 @@
+{
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2024-12-30",
+      "results": {
+        "skip": 0,
+        "limit": 3,
+        "total": 597
+      }
+    },
+    "results": [
+      {
+        "third_party_flag": "N",
+        "city": "San Antonio",
+        "advisory_committee_description": "General, Plastic Surgery",
+        "address_1": "6203 Farinon Dr",
+        "address_2": "",
+        "statement_or_summary": "Summary",
+        "product_code": "OMP",
+        "openfda": {
+          "device_name": "Negative Pressure Wound Therapy Powered Suction Pump",
+          "medical_specialty_description": "General, Plastic Surgery",
+          "regulation_number": "878.4780",
+          "device_class": "2"
+        },
+        "zip_code": "78249",
+        "applicant": "3M Health Care Business Group",
+        "decision_date": "2021-12-20",
+        "decision_code": "SESE",
+        "country_code": "US",
+        "device_name": "3M Veraflo Cleanse Choice Complete Dressing Kit (Medium Dressing Kit: VFCCC05MD, Large Dressing Kit: VFCCC05LG)",
+        "advisory_committee": "SU",
+        "contact": "Margaret  Marsh",
+        "expedited_review_flag": "",
+        "k_number": "K211521",
+        "state": "TX",
+        "date_received": "2021-05-17",
+        "review_advisory_committee": "SU",
+        "postal_code": "78249",
+        "decision_description": "Substantially Equivalent",
+        "clearance_type": "Traditional"
+      }
+      

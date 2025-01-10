@@ -1,0 +1,24 @@
+{
+  "company": {
+    "cik": "0000066740",
+    "ticker": "MMM",
+    "name": "3M Co",
+    "marketCap": "$70.30B"
+  },
+  "financials": {
+    "revenue": "$18.57B",
+    "revenueGrowth": "194.96% YoY",
+    "advertisingExpense": "$265.00M",
+    "marketingExpense": "$NaNM",
+    "rAndDExpense": "$NaNM"
+  },
+  "marketing": {
+    "customerAcquisitionCost": "$18565000000.00",
+    "romi": "NaN%"
+  },
+  "partnerships": [],
+  "patents": {
+    "totalPatents": 0,
+    "recentPatents": []
+  }
+}

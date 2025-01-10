@@ -1,0 +1,230 @@
+{
+  "companyName": "Pfizer",
+  "patents": [],
+  "fdaFilings": [
+    {
+      "company": "PFIZER",
+      "type": "SUPPL",
+      "date": "20241216",
+      "status": "AP",
+      "applicationNumber": "NDA020753"
+    },
+    {
+      "company": "NOVARTIS PHARMS",
+      "type": "SUPPL",
+      "date": "20090707",
+      "status": "AP",
+      "applicationNumber": "NDA020726"
+    },
+    {
+      "company": "GRANULES",
+      "type": "ORIG",
+      "date": "20241216",
+      "status": "AP",
+      "applicationNumber": "ANDA219258"
+    },
+    {
+      "company": "ANI PHARMS",
+      "type": "SUPPL",
+      "date": "20060510",
+      "status": "AP",
+      "applicationNumber": "NDA020541"
+    },
+    {
+      "company": "MSN LABS PVT LTD",
+      "type": "ORIG",
+      "date": "20241216",
+      "status": "TA",
+      "applicationNumber": "ANDA218152"
+    },
+    {
+      "company": "SANDOZ",
+      "type": "ORIG",
+      "date": "20210115",
+      "status": "AP",
+      "applicationNumber": "ANDA206604"
+    },
+    {
+      "company": "ZYDUS",
+      "type": "SUPPL",
+      "date": "20241216",
+      "status": "AP",
+      "applicationNumber": "ANDA211747"
+    },
+    {
+      "company": "PFIZER",
+      "type": "SUPPL",
+      "date": "20160229",
+      "status": "AP",
+      "applicationNumber": "NDA021583"
+    },
+    {
+      "company": "ASTELLAS",
+      "type": "SUPPL",
+      "date": "20241216",
+      "status": "AP",
+      "applicationNumber": "NDA216578"
+    },
+    {
+      "company": "PURACAP PHARM",
+      "type": "ORIG",
+      "date": "20060719",
+      "status": "AP",
+      "applicationNumber": "ANDA077938"
+    },
+    {
+      "company": "SANDOZ",
+      "type": "SUPPL",
+      "date": "20240708",
+      "status": "AP",
+      "applicationNumber": "ANDA075428"
+    },
+    {
+      "company": "FRESENIUS KABI USA",
+      "type": "ORIG",
+      "date": "20240305",
+      "status": "AP",
+      "applicationNumber": "BLA761275"
+    },
+    {
+      "company": "CHECKPOINT THERAPEUTICS INC",
+      "type": "ORIG",
+      "date": "20241213",
+      "status": "AP",
+      "applicationNumber": "BLA761297"
+    },
+    {
+      "company": "NEUROCRINE",
+      "type": "ORIG",
+      "date": "20241213",
+      "status": "AP",
+      "applicationNumber": "NDA218808"
+    },
+    {
+      "company": "NEUROCRINE",
+      "type": "ORIG",
+      "date": "20241213",
+      "status": "AP",
+      "applicationNumber": "NDA218820"
+    },
+    {
+      "company": "TARO",
+      "type": "ORIG",
+      "date": "20241213",
+      "status": "AP",
+      "applicationNumber": "ANDA218858"
+    },
+    {
+      "company": "LUPIN LTD",
+      "type": "ORIG",
+      "date": "20241213",
+      "status": "AP",
+      "applicationNumber": "ANDA213926"
+    },
+    {
+      "company": "GALDERMA LABS LP",
+      "type": "ORIG",
+      "date": "20241213",
+      "status": "AP",
+      "applicationNumber": "BLA761391"
+    },
+    {
+      "company": "VERTEX PHARMS INC",
+      "type": "SUPPL",
+      "date": "20160906",
+      "status": "AP",
+      "applicationNumber": "NDA206038"
+    },
+    {
+      "company": "ANI PHARMS",
+      "type": "SUPPL",
+      "date": "20231026",
+      "status": "AP",
+      "applicationNumber": "NDA008975"
+    }
+  ],
+  "marketData": [
+    {
+      "company": "OpenAI",
+      "description": "OpenAI creates artificial intelligence technologies to assist with tasks and provide support for human activities.",
+      "rank": 1
+    },
+    {
+      "company": "Anthropic",
+      "description": "Anthropic is an AI research company that focuses on the safety and alignment of AI systems with human values.",
+      "rank": 2
+    },
+    {
+      "company": "Perplexity",
+      "description": "Perplexity is an AI-powered search and answer platform designed to provide real-time responses to user queries.",
+      "rank": 3
+    },
+    {
+      "company": "xAI",
+      "description": "XAI is an AI company that develops a platform to accelerate human scientific discovery.",
+      "rank": 4
+    },
+    {
+      "company": "European Investment Bank",
+      "description": "European Investment Bank provides lending, borrowing, and treasury services.",
+      "rank": 5
+    },
+    {
+      "company": "Asian Development Bank",
+      "description": "Asian Development Bank is a climate bank that finances economic growth and diverse development projects.",
+      "rank": 6
+    },
+    {
+      "company": "European Bank for Reconstruction and Development",
+      "description": "European Bank for Reconstruction and Development is a financial institution that offers banking solutions, financial instruments and advice.",
+      "rank": 7
+    },
+    {
+      "company": "Zepto",
+      "description": "Zepto is an e-grocery company that delivers daily essentials and grocery items to consumers.",
+      "rank": 8
+    },
+    {
+      "company": "Oura",
+      "description": "Oura designs and develops wearable rings that track sleep and performance metrics for health and wellness monitoring.",
+      "rank": 9
+    },
+    {
+      "company": "Bluesky",
+      "description": "Bluesky is a social media platform fostering open connections and creativity.",
+      "rank": 10
+    }
+  ],
+  "recentNews": [
+    {
+      "title": "2025 drug price rise: Pharma companies plan to make more than 250 medicines more expensive",
+      "source": "Biztoc.com",
+      "publishedAt": "2024-12-31T17:17:19Z",
+      "url": "https://biztoc.com/x/b8f40ba1eb35882c"
+    },
+    {
+      "title": "Sangamo Therapeutics’ stock falls the most in 16 years after Pfizer ends hemophilia pact",
+      "source": "Biztoc.com",
+      "publishedAt": "2024-12-31T17:06:50Z",
+      "url": "https://biztoc.com/x/eb946c6c68b14960"
+    },
+    {
+      "title": "Sangamo Therapeutics Stock Plunges As Pfizer Terminates Hemophilia Gene Therapy Pact",
+      "source": "Biztoc.com",
+      "publishedAt": "2024-12-31T17:06:30Z",
+      "url": "https://biztoc.com/x/2311470265ee5759"
+    },
+    {
+      "title": "SUI DeSci Agents Launches a Platform to Democratize Longevity Amid DeSci Boom",
+      "source": "CryptoGlobe",
+      "publishedAt": "2024-12-31T16:33:50Z",
+      "url": "https://www.cryptoglobe.com/latest/2024/12/sui-desci-agents-launches-a-platform-to-democratize-longevity-amid-desci-boom/"
+    },
+    {
+      "title": "Enanta stock touches 52-week low at $5.68 amid market challenges",
+      "source": "Investing.com",
+      "publishedAt": "2024-12-31T16:25:23Z",
+      "url": "https://www.investing.com/news/company-news/enanta-stock-touches-52week-low-at-568-amid-market-challenges-93CH-3792672"
+    }
+  ]
+}  

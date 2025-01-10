@@ -1,0 +1,576 @@
+// const express = require('express');
+// const axios = require('axios');
+// const dotenv = require('dotenv');
+// const cors = require('cors');
+
+// dotenv.config();
+
+// const app = express();
+// app.use(cors());
+// app.use(express.json());
+
+// // SEC API Configuration
+// const SEC_BASE_URL = 'https://data.sec.gov';
+// const USER_AGENT = 'Company Name user@email.com'; // Replace with your details as per SEC requirements
+
+// // Crunchbase API Configuration
+// const CRUNCHBASE_BASE_URL = 'https://api.crunchbase.com/api/v4';
+// const CRUNCHBASE_API_KEY = process.env.CRUNCHBASE_API_KEY;
+
+// // Utility function to format CIK with leading zeros
+// const formatCIK = (cik) => cik.padStart(10, '0');
+
+// // SEC Data Fetching Functions
+// const fetchCompanyFilings = async (cik) => {
+//     try {
+//         const response = await axios.get(
+//             `${SEC_BASE_URL}/submissions/CIK${formatCIK(cik)}.json`,
+//             {
+//                 headers: {
+//                     'User-Agent': USER_AGENT,
+//                     'Accept-Encoding': 'gzip, deflate'
+//                 }
+//             }
+//         );
+//         return response.data;
+//     } catch (error) {
+//         console.error('Error fetching SEC filings:', error);
+//         throw error;
+//     }
+// };
+
+// const fetchFinancialMetrics = async (cik) => {
+//     try {
+//         const response = await axios.get(
+//             `${SEC_BASE_URL}/api/xbrl/companyfacts/CIK${formatCIK(cik)}.json`,
+//             {
+//                 headers: {
+//                     'User-Agent': USER_AGENT,
+//                     'Accept-Encoding': 'gzip, deflate'
+//                 }
+//             }
+//         );
+//         return response.data;
+//     } catch (error) {
+//         console.error('Error fetching financial metrics:', error);
+//         throw error;
+//     }
+// };
+
+// // Extract relevant marketing metrics from SEC data
+// const extractMarketingMetrics = (financialData) => {
+//     const metrics = {
+//         marketingExpenses: null,
+//         revenue: null,
+//         operatingExpenses: null,
+//         employeeCount: null,
+//         geographicRevenue: {},
+//         segments: {}
+//     };
+
+//     try {
+//         const facts = financialData.facts;
+        
+//         // Extract marketing expenses if available
+//         if (facts['us-gaap']?.['AdvertisingExpense']) {
+//             const marketingData = facts['us-gaap']['AdvertisingExpense'].units.USD;
+//             metrics.marketingExpenses = marketingData[marketingData.length - 1].val;
+//         }
+
+//         // Extract revenue
+//         if (facts['us-gaap']?.['Revenues']) {
+//             const revenueData = facts['us-gaap']['Revenues'].units.USD;
+//             metrics.revenue = revenueData[revenueData.length - 1].val;
+//         }
+
+//         // Extract employee count
+//         if (facts['us-gaap']?.['EntityCommonStockSharesOutstanding']) {
+//             const employeeData = facts['us-gaap']['EntityCommonStockSharesOutstanding'].units.shares;
+//             metrics.employeeCount = employeeData[employeeData.length - 1].val;
+//         }
+
+//         return metrics;
+//     } catch (error) {
+//         console.error('Error extracting marketing metrics:', error);
+//         return metrics;
+//     }
+// };
+
+// // Crunchbase Data Fetching Function (Free API)
+// const fetchCrunchbaseData = async (companyName) => {
+//     try {
+//         // Search for company
+//         const searchResponse = await axios.get(
+//             `${CRUNCHBASE_BASE_URL}/autocompletes`,
+//             {
+//                 params: {
+//                     user_key: CRUNCHBASE_API_KEY,
+//                     query: companyName,
+//                     collection_types: 'organizations'
+//                 }
+//             }
+//         );
+
+//         if (searchResponse.data.entities?.[0]) {
+//             const permalink = searchResponse.data.entities[0].identifier.permalink;
+            
+//             // Get basic company info (available in free tier)
+//             const companyResponse = await axios.get(
+//                 `${CRUNCHBASE_BASE_URL}/entities/organizations/${permalink}`,
+//                 {
+//                     params: {
+//                         user_key: CRUNCHBASE_API_KEY,
+//                         card_ids: 'founders,company_overview'
+//                     }
+//                 }
+//             );
+
+//             return companyResponse.data;
+//         }
+//         return null;
+//     } catch (error) {
+//         console.error('Error fetching Crunchbase data:', error);
+//         return null;
+//     }
+// };
+
+// // Main endpoint to get competitor analysis
+// app.post('/api/competitor-analysis', async (req, res) => {
+//     try {
+//         const { competitors } = req.body;
+//         const competitorData = {};
+
+//         for (const competitor of competitors) {
+//             const { cik, name } = competitor;
+            
+//             // Fetch SEC data
+//             const filings = await fetchCompanyFilings(cik);
+//             const financialData = await fetchFinancialMetrics(cik);
+//             const marketingMetrics = extractMarketingMetrics(financialData);
+
+//             // Fetch Crunchbase data
+//             const crunchbaseData = await fetchCrunchbaseData(name);
+
+//             competitorData[name] = {
+//                 secData: {
+//                     filings: filings,
+//                     marketingMetrics: marketingMetrics
+//                 },
+//                 crunchbaseData: crunchbaseData
+//             };
+//         }
+
+//         res.json({
+//             success: true,
+//             data: competitorData
+//         });
+//     } catch (error) {
+//         console.error('Error in competitor analysis:', error);
+//         res.status(500).json({
+//             success: false,
+//             error: error.message
+//         });
+//     }
+// });
+
+// // Endpoint to get historical filing data
+// app.get('/api/historical-filings/:cik', async (req, res) => {
+//     try {
+//         const { cik } = req.params;
+//         const { years = 3 } = req.query;
+
+//         const filings = await fetchCompanyFilings(cik);
+//         const historicalFilings = filings.filings.recent
+//             .filter(filing => filing.form === '10-K' || filing.form === '10-Q')
+//             .slice(0, years * 4); // 4 filings per year (3 10-Q + 1 10-K)
+
+//         res.json({
+//             success: true,
+//             data: historicalFilings
+//         });
+//     } catch (error) {
+//         res.status(500).json({
+//             success: false,
+//             error: error.message
+//         });
+//     }
+// });
+
+// async function sendCompetitorAnalysis() {
+//     const url = 'http://localhost:3000/api/competitor-analysis';
+//     const data = {
+//         competitors: [
+//             { cik: "320193", name: "Apple Inc." },
+//             { cik: "1018724", name: "Amazon.com Inc." }
+//         ]
+//     };
+
+//     try {
+//         const response = await axios.post(url, data, {
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//         });
+
+//         console.log('Response:', response.data);
+        
+//     } catch (error) {
+//         console.error('Error:', error.response?.data || error.message);
+//     }
+// }
+
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+    
+// sendCompetitorAnalysis();
+
+// });
+
+
+const express = require('express');
+const axios = require('axios');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const fs = require('fs').promises;
+const path = require('path');
+const moment = require('moment');
+
+dotenv.config();
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// SEC API Configuration
+const SEC_BASE_URL = 'https://data.sec.gov';
+const USER_AGENT = 'Company Name user@email.com'; // Replace with your details as per SEC requirements
+
+// Crunchbase API Configuration
+const CRUNCHBASE_BASE_URL = 'https://api.crunchbase.com/api/v4';
+const CRUNCHBASE_API_KEY = process.env.CRUNCHBASE_API_KEY;
+
+// Utility function to format CIK with leading zeros
+const formatCIK = (cik) => cik.padStart(10, '0');
+
+// SEC Data Fetching Functions
+const fetchCompanyFilings = async (cik) => {
+    try {
+        const response = await axios.get(
+            `${SEC_BASE_URL}/submissions/CIK${formatCIK(cik)}.json`,
+            {
+                headers: {
+                    'User-Agent': USER_AGENT,
+                    'Accept-Encoding': 'gzip, deflate'
+                }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching SEC filings:', error);
+        throw error;
+    }
+};
+
+const fetchFinancialMetrics = async (cik) => {
+    try {
+        const response = await axios.get(
+            `${SEC_BASE_URL}/api/xbrl/companyfacts/CIK${formatCIK(cik)}.json`,
+            {
+                headers: {
+                    'User-Agent': USER_AGENT,
+                    'Accept-Encoding': 'gzip, deflate'
+                }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching financial metrics:', error);
+        throw error;
+    }
+};
+
+// Extract relevant marketing metrics from SEC data
+const extractMarketingMetrics = (financialData) => {
+    const metrics = {
+        marketingExpenses: null,
+        revenue: null,
+        operatingExpenses: null,
+        employeeCount: null,
+        geographicRevenue: {},
+        segments: {}
+    };
+
+    try {
+        const facts = financialData.facts;
+        
+        // Extract marketing expenses if available
+        if (facts['us-gaap']?.['AdvertisingExpense']) {
+            const marketingData = facts['us-gaap']['AdvertisingExpense'].units.USD;
+            metrics.marketingExpenses = marketingData[marketingData.length - 1].val;
+        }
+
+        // Extract revenue
+        if (facts['us-gaap']?.['Revenues']) {
+            const revenueData = facts['us-gaap']['Revenues'].units.USD;
+            metrics.revenue = revenueData[revenueData.length - 1].val;
+        }
+
+        // Extract employee count
+        if (facts['us-gaap']?.['EntityCommonStockSharesOutstanding']) {
+            const employeeData = facts['us-gaap']['EntityCommonStockSharesOutstanding'].units.shares;
+            metrics.employeeCount = employeeData[employeeData.length - 1].val;
+        }
+
+        return metrics;
+    } catch (error) {
+        console.error('Error extracting marketing metrics:', error);
+        return metrics;
+    }
+};
+
+// Crunchbase Data Fetching Function (Free API)
+const fetchCrunchbaseData = async (companyName) => {
+    try {
+        // Search for company
+        const searchResponse = await axios.get(
+            `${CRUNCHBASE_BASE_URL}/autocompletes`,
+            {
+                params: {
+                    user_key: CRUNCHBASE_API_KEY,
+                    query: companyName,
+                    collection_types: 'organizations'
+                }
+            }
+        );
+
+        if (searchResponse.data.entities?.[0]) {
+            const permalink = searchResponse.data.entities[0].identifier.permalink;
+            
+            // Get basic company info (available in free tier)
+            const companyResponse = await axios.get(
+                `${CRUNCHBASE_BASE_URL}/entities/organizations/${permalink}`,
+                {
+                    params: {
+                        user_key: CRUNCHBASE_API_KEY,
+                        card_ids: 'founders,company_overview'
+                    }
+                }
+            );
+
+            return companyResponse.data;
+        }
+        return null;
+    } catch (error) {
+        console.error('Error fetching Crunchbase data:', error);
+        return null;
+    }
+};
+
+// File storage utilities
+const DATA_DIR = path.join(__dirname, 'data');
+const ARCHIVE_DIR = path.join(DATA_DIR, 'archive');
+
+// Ensure data directories exist
+const initializeDataDirectories = async () => {
+    try {
+        await fs.mkdir(DATA_DIR, { recursive: true });
+        await fs.mkdir(ARCHIVE_DIR, { recursive: true });
+    } catch (error) {
+        console.error('Error creating data directories:', error);
+    }
+};
+
+// Save data to file with timestamp
+const saveCompetitorData = async (competitorData) => {
+    const timestamp = moment().format('YYYY-MM-DD-HH-mm-ss');
+    
+    // Save current snapshot
+    const currentFileName = path.join(DATA_DIR, 'current_data.json');
+    await fs.writeFile(currentFileName, JSON.stringify(competitorData, null, 2));
+    
+    // Save archived version with timestamp
+    const archivedFileName = path.join(ARCHIVE_DIR, `competitor_data_${timestamp}.json`);
+    await fs.writeFile(archivedFileName, JSON.stringify(competitorData, null, 2));
+    
+    return { currentFileName, archivedFileName };
+};
+
+// Load most recent data
+const loadCurrentData = async () => {
+    try {
+        const currentFileName = path.join(DATA_DIR, 'current_data.json');
+        const data = await fs.readFile(currentFileName, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error loading current data:', error);
+        return null;
+    }
+};
+
+// Main endpoint to get competitor analysis
+app.post('/api/competitor-analysis', async (req, res) => {
+    try {
+        const { competitors } = req.body;
+        const competitorData = {};
+
+        for (const competitor of competitors) {
+            const { cik, name } = competitor;
+            
+            // Fetch SEC data
+            const filings = await fetchCompanyFilings(cik);
+            const financialData = await fetchFinancialMetrics(cik);
+            const marketingMetrics = extractMarketingMetrics(financialData);
+
+            // Fetch Crunchbase data
+            const crunchbaseData = await fetchCrunchbaseData(name);
+
+            competitorData[name] = {
+                secData: {
+                    filings: filings,
+                    marketingMetrics: marketingMetrics
+                },
+                crunchbaseData: crunchbaseData
+            };
+        }
+
+        // Save the data
+        const { currentFileName, archivedFileName } = await saveCompetitorData(competitorData);
+
+        res.json({
+            success: true,
+            data: competitorData,
+            stored: {
+                current: currentFileName,
+                archived: archivedFileName
+            }
+        });
+    } catch (error) {
+        console.error('Error in competitor analysis:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// Endpoint to get historical filing data
+app.get('/api/historical-filings/:cik', async (req, res) => {
+    try {
+        const { cik } = req.params;
+        const { years = 3 } = req.query;
+
+        const filings = await fetchCompanyFilings(cik);
+        const historicalFilings = filings.filings.recent
+            .filter(filing => filing.form === '10-K' || filing.form === '10-Q')
+            .slice(0, years * 4); // 4 filings per year (3 10-Q + 1 10-K)
+
+        res.json({
+            success: true,
+            data: historicalFilings
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// Endpoint to get current stored data
+app.get('/api/stored-data/current', async (req, res) => {
+    try {
+        const data = await loadCurrentData();
+        if (!data) {
+            return res.status(404).json({
+                success: false,
+                error: 'No stored data found'
+            });
+        }
+        res.json({
+            success: true,
+            data: data
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// Endpoint to get list of archived data files
+app.get('/api/stored-data/archives', async (req, res) => {
+    try {
+        const files = await fs.readdir(ARCHIVE_DIR);
+        const archives = files.map(file => ({
+            filename: file,
+            date: moment(file.split('_')[2].split('.')[0], 'YYYY-MM-DD-HH-mm-ss').toISOString()
+        }));
+        
+        res.json({
+            success: true,
+            archives: archives.sort((a, b) => b.date.localeCompare(a.date))
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// Endpoint to get specific archived data
+app.get('/api/stored-data/archives/:filename', async (req, res) => {
+    try {
+        const filePath = path.join(ARCHIVE_DIR, req.params.filename);
+        const data = await fs.readFile(filePath, 'utf8');
+        res.json({
+            success: true,
+            data: JSON.parse(data)
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// Initialize data directories on startup
+const startServer = async () => {
+    await initializeDataDirectories();
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    sendCompetitorAnalysis();
+})
+};
+
+startServer()
+
+async function sendCompetitorAnalysis() {
+        const url = 'http://localhost:3000/api/competitor-analysis';
+        const data = {
+            competitors: [
+                { cik: "320193", name: "Apple Inc." },
+                { cik: "1018724", name: "Amazon.com Inc." }
+            ]
+        };
+    
+        try {
+            const response = await axios.post(url, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            console.log('Response:', response.data);
+            
+        } catch (error) {
+            console.error('Error:', error.response?.data || error.message);
+        }
+    }
+    
+         

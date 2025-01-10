@@ -1,0 +1,23 @@
+{
+  "company": {
+    "cik": "0000066740",
+    "ticker": "MMM",
+    "marketCap": "$70.30B"
+  },
+  "financials": {
+    "revenue": "$18.57B",
+    "revenueGrowth": "194.96%",
+    "netIncome": "$3.44B",
+    "netIncomeGrowth": "151.09%"
+  },
+  "expenses": {
+    "rAndD": "$1000.00M",
+    "marketing": "$NaNM",
+    "operatingExpenses": "$NaNM"
+  },
+  "financialPosition": {
+    "debtToEquity": "0.89",
+    "totalAssets": "$40.88B",
+    "totalLiabilities": "$36.18B"
+  }
+}

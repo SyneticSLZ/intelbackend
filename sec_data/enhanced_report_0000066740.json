@@ -1,0 +1,162 @@
+{
+  "companyOverview": {
+    "financials": {
+      "revenue": {
+        "current": 18565000000,
+        "previous": 6294000000,
+        "growth": 194.9634572608834,
+        "trend": "moderate decline"
+      },
+      "marketShare": 26.40933352447813,
+      "rAndDIntensity": 5.386479935362241,
+      "profitMargin": 18.55642337732292
+    },
+    "marketingMetrics": {
+      "marketingEfficiency": null,
+      "customerAcquisitionTrend": null
+    },
+    "operationalMetrics": {
+      "employeeProductivity": null,
+      "operatingEfficiency": null
+    },
+    "marketPosition": {
+      "marketShare": 5.943652953417641,
+      "relativeGrowth": {
+        "differential": 94.46156435880306,
+        "percentile": -50
+      },
+      "competitivePosition": "Fast-Growing Challenger"
+    }
+  },
+  "competitiveAnalysis": {
+    "marketTrends": {
+      "marketConcentration": 7841.941233363279,
+      "marketLeader": {
+        "name": "Google",
+        "metrics": {
+          "financials": {
+            "revenue": {
+              "current": 257637000000,
+              "previous": 117194000000,
+              "growth": 119.83804631636433,
+              "trend": "strong decline"
+            },
+            "marketShare": 11.088196317678664,
+            "rAndDIntensity": 14.054658298303426,
+            "profitMargin": 28.560338771216863
+          },
+          "marketingMetrics": {
+            "marketingEfficiency": 12.601467351430667,
+            "customerAcquisitionTrend": null
+          },
+          "operationalMetrics": {
+            "employeeProductivity": null,
+            "operatingEfficiency": null
+          }
+        }
+      },
+      "growthTrends": [
+        {
+          "name": "Microsoft",
+          "revenueGrowth": 81.16573948779632,
+          "profitGrowth": 68.23890671683081
+        },
+        {
+          "name": "Google",
+          "revenueGrowth": 119.83804631636433,
+          "profitGrowth": 28.560338771216863
+        }
+      ],
+      "marketingEfficiency": [
+        {
+          "name": "Microsoft",
+          "efficiency": 6.322896624103551,
+          "cac": 0
+        },
+        {
+          "name": "Google",
+          "efficiency": 12.601467351430667,
+          "cac": 0
+        }
+      ]
+    },
+    "competitorComparison": [
+      {
+        "name": "Microsoft",
+        "metrics": {
+          "financials": {
+            "revenue": {
+              "current": 36148000000,
+              "previous": 19953000000,
+              "growth": 81.16573948779632,
+              "trend": "strong growth"
+            },
+            "marketShare": 1.153487034577694,
+            "rAndDIntensity": 20.86975766294124,
+            "profitMargin": 68.23890671683081
+          },
+          "marketingMetrics": {
+            "marketingEfficiency": 6.322896624103551,
+            "customerAcquisitionTrend": null
+          },
+          "operationalMetrics": {
+            "employeeProductivity": null,
+            "operatingEfficiency": 117.24300099590572
+          }
+        }
+      },
+      {
+        "name": "Google",
+        "metrics": {
+          "financials": {
+            "revenue": {
+              "current": 257637000000,
+              "previous": 117194000000,
+              "growth": 119.83804631636433,
+              "trend": "strong decline"
+            },
+            "marketShare": 11.088196317678664,
+            "rAndDIntensity": 14.054658298303426,
+            "profitMargin": 28.560338771216863
+          },
+          "marketingMetrics": {
+            "marketingEfficiency": 12.601467351430667,
+            "customerAcquisitionTrend": null
+          },
+          "operationalMetrics": {
+            "employeeProductivity": null,
+            "operatingEfficiency": null
+          }
+        }
+      }
+    ],
+    "swotAnalysis": {
+      "strengths": [
+        "Strong revenue growth"
+      ],
+      "weaknesses": [
+        "Below average market share"
+      ],
+      "opportunities": [
+        "Potential expansion into: North America, Europe, Asia, South America, Africa"
+      ],
+      "threats": []
+    }
+  },
+  "marketingIntelligence": {
+    "channelEffectiveness": {
+      "efficiency": null,
+      "trends": "Insufficient data",
+      "recommendations": []
+    },
+    "customerSegments": null,
+    "geographicPresence": null
+  },
+  "recommendations": [
+    {
+      "area": "Marketing",
+      "recommendation": "Review and optimize marketing channels",
+      "rationale": "Low marketing ROI compared to industry standards"
+    }
+  ]
+}
