@@ -2956,12 +2956,10 @@ async function searchDeviceClassification(searchTerm, apiKey) {
 
 // Helper function for FDA API calls
 async function makeFDARequest(name, endpoint, searchParams) {
-    const defaultParams = {
-        sort: 'report_date:desc' // Sort by report date descending               // Limit to most recent result
-    };
+    
     const params = new URLSearchParams({
         api_key: process.env.FDA_API_KEY,
-        ...defaultParams,
+    
         ...searchParams
     });
 
