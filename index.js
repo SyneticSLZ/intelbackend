@@ -379,11 +379,55 @@ async function searchWithVariations(companyName) {
 }
 
 
+const companyVariations = {
+    'GN ReSound': [
+        'GN Hearing Care Corporation',
+        'GN ReSound (Malaysia) Sdn Bhd.',
+        'GN ReSound (Malaysia) Sdn. Bhd',
+        'GN RESOUND CHINA, LTD.'
+    ],
+    'Sonova': [
+        'Sonova AG',
+        'Sonova Hearing (Suzhou) Co., Ltd.',
+        'Sonova North American Operations Center S.A.de C.V',
+        'Sonova Operations Center Vietnam Co., Ltd',
+        'Sonova USA Inc.'
+    ],
+    'WS Audiology': [
+        'WS Audiology Canada Inc.',
+        'WS Audiology Mexico S.A. de C.V.',
+        'WS Audiology USA, Inc.'
+    ],
+    'Oticon': [
+        'Bernafon LLC',
+        'Oticon A/S',
+        'Oticon Medical AB',
+        'OTICON, INC.',
+        'SONIC INNOVATIONS, INC.'
+    ],
+    'Starkey': [
+        'STARKEY (Suzhou) Hearing Technology Co, LTD.',
+        'STARKEY DE MEXICO, S.A. DE C.V.',
+        'Starkey France S.A.R.L.',
+        'Starkey Global Distribution Center',
+        'Starkey Laboratories, Inc.'
+    ]
+};
+
 async function findCompanyVariations(baseCompanyName) {
     try {
         // Clean the base name
         const cleanName = baseCompanyName.trim().toUpperCase();
-        const variations = new Set([cleanName]);
+        // const variations = new Set([cleanName]);
+
+        const variations = new Set([
+            cleanName,
+            ...(companyVariations[baseCompanyName] || []).map(name => name.trim().toUpperCase())
+        ]);
+        
+        console.log('\nFound variations:', Array.from(variations));
+
+
         const products = new Set();
         const relatedNames = new Set();
 
