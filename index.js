@@ -2954,6 +2954,7 @@ async function searchDeviceClassification(searchTerm, apiKey) {
 
 
 
+
 // Helper function for FDA API calls
 async function makeFDARequest(name, endpoint, searchParams) {
     
@@ -3004,24 +3005,33 @@ app.post('/api/fda', async (req, res) => {
     // 1. Device PMAyes
    const pma =  await makeFDARequest('Device PMA', 'device/pma.json', {
         search: `applicant:"${COMPANY}"`,
-        limit: 3
+        limit: 30
     });
 
     // 2. 510(k)
     const device501k = await makeFDARequest('510(k)', 'device/510k.json', {
         search: `applicant:"${COMPANY}"`,
-        limit: 3
-    });
+        limit: 30
+    });    
+    // 3. registration and listing
+    // const registrationlisting = await makeFDARequest('510(k)', 'device/reglist.json', {
+    //     search: `proprietary_name:"${COMPANY}"`,
+    //     limit: 3
+    // }); 
+    
+    
+
 
     const udi = await makeFDARequest('UDI', 'device/udi.json', {
         search: `company_name:"${COMPANY}"`,
-        limit: 3
+        limit: 30
     });
 
     res.json({
         pma : pma,
         d501k : device501k,
         udi : udi,
+        registrationlisting: registrationlisting,
         drug : drugData.value,
         recalls : recalls.value
     })
@@ -3961,7 +3971,50 @@ app.get('/api/competitor/:cik', async (req, res) => {
 
 
 
+
 app.listen(PORT, async () => {
+//     const apiUrl = 'https://beta-api.uspto.gov/api/v1/patent/applications/search';
+
+// // Example request parameters
+// const queryParams = {
+//     q: 'query_string',  // Replace with your actual query string
+//     start: 0,           // Replace with your start index
+//     rows: 10            // Replace with the number of results you want
+// };
+
+// // Your API key
+// const apiKey = process.env.USPTO_API_KEY; // Replace with your actual API key
+
+// // Constructing URL with query parameters
+// const url = new URL(apiUrl);
+// url.search = new URLSearchParams(queryParams).toString();
+
+// // Fetching data from the API
+// fetch(url, {
+//     method: 'GET',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'X-Api-Key': apiKey // Add the API key header
+//     }
+// })
+// .then(response => {
+//     if (!response.ok) {
+//         throw new Error(`Network response was not ok: ${response.statusText}`);
+//     }
+//     return response.json();
+// })
+// .then(data => {
+//     // Handle the data returned by the API
+//     console.log(data);
+// })
+// .catch(error => {
+//     // Handle errors
+//     console.error('Error fetching data:', error);
+// });
+// const registrationlisting = await makeFDARequest('reglist', 'device/reglist.json', {
+//     search: `proprietary_name:"Sonova"`,
+//     limit: 3
+// }); 
     // analyzeCompetitor(process.env.SEC_USER_AGENT, '0000066740')
     console.log(`Server running on port ${PORT}`);
     // const axios = require('axios');
