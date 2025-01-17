@@ -3986,15 +3986,15 @@ const fetchFDAData = async () => {
 app.listen(PORT, async () => {
 //     const apiUrl = 'https://beta-api.uspto.gov/api/v1/patent/applications/search';
   // Example usage
-  fetchFDAData()
-    .then(data => {
-      // Handle the fetched data
-      console.log('Successfully fetched FDA data:', data);
-    })
-    .catch(error => {
-      // Handle errors
-      console.error('Failed to fetch FDA data:', error);
-    });
+//   fetchFDAData()
+//     .then(data => {
+//       // Handle the fetched data
+//       console.log('Successfully fetched FDA data:', data);
+//     })
+//     .catch(error => {
+//       // Handle errors
+//       console.error('Failed to fetch FDA data:', error);
+//     });
 
 // // Example request parameters
 // const queryParams = {
