@@ -3005,13 +3005,13 @@ app.post('/api/fda', async (req, res) => {
     // 1. Device PMAyes
    const pma =  await makeFDARequest('Device PMA', 'device/pma.json', {
         search: `applicant:"${COMPANY}"`,
-        limit: 30
+        limit: 5
     });
 
     // 2. 510(k)
     const device501k = await makeFDARequest('510(k)', 'device/510k.json', {
         search: `applicant:"${COMPANY}"`,
-        limit: 30
+        limit: 5
     });    
     // 3. registration and listing
     // const registrationlisting = await makeFDARequest('510(k)', 'device/reglist.json', {
@@ -3024,7 +3024,7 @@ app.post('/api/fda', async (req, res) => {
 
     const udi = await makeFDARequest('UDI', 'device/udi.json', {
         search: `company_name:"${COMPANY}"`,
-        limit: 30
+        limit: 5
     });
 
     res.json({
@@ -3970,10 +3970,31 @@ app.get('/api/competitor/:cik', async (req, res) => {
 // Replace "Google" with the company name you want to search for
 
 
-
+const fetchFDAData = async () => {
+    const url = 'https://api.fda.gov/device/registrationlisting.json?search=proprietary_name=Sonova AG&limit=100';
+    try {
+      const response = await axios.get(url);
+      console.log('FDA Data:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching FDA data:', error.response?.data || error.message);
+      throw error;
+    }
+  };
+  
 
 app.listen(PORT, async () => {
 //     const apiUrl = 'https://beta-api.uspto.gov/api/v1/patent/applications/search';
+  // Example usage
+  fetchFDAData()
+    .then(data => {
+      // Handle the fetched data
+      console.log('Successfully fetched FDA data:', data);
+    })
+    .catch(error => {
+      // Handle errors
+      console.error('Failed to fetch FDA data:', error);
+    });
 
 // // Example request parameters
 // const queryParams = {
